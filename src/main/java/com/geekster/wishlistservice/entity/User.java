@@ -18,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "USER_")
+@Table(name = "APP_USER")
 public class User implements UserDetails {
     @Id
     @Column(name = "EMAIL", unique = true)
@@ -37,6 +37,7 @@ public class User implements UserDetails {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
+            name = "authorities",
             joinColumns = @JoinColumn(name = "USERNAME"),
             inverseJoinColumns = @JoinColumn(name = "ROLE_ID")
     )

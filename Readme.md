@@ -4,15 +4,15 @@
 - Once registered a user can request a JWT token to make authorized requests to the server. Each token is valid for 24hrs.
 - A valid user has a *Wishlist* associated with their account. A set number of items are available on the server to add to this wishlist.
 - A user can view the available items. The items are associated with a name, price and current stock availability.
-- Admins have the privelage to manipulate the available items on the store but a regular user many only view them and add/remove them from their personal wishlist.
+- Admins have the privilege to manipulate the available items on the store but a regular user many only view them and add/remove them from their personal wishlist.
 
 ## Setup and use
 - Currently, there is no programmatic way to assign **admin** role to a user. This must be done externally. However, a separate admin login, registration pathway can be setup later (akin to the existing endpoints available to *Users*).
-- After cloning the repository, check the `application.properties` file and ensure a `MySql` database can be setup at localhost:3306/xindus-db-prod. The application is flexible and is indifferent to the relational database configuration in `application.properties`.
+- After cloning the repository, ensure a `MySql` database can be setup at localhost:3306/xindus-db-prod. The application is flexible and is indifferent to the relational database configured in `application.properties`.
 - Hibernate is configured to generate DDL schema commands for the specified dialect. (By default, MySQL).
 
 ### Setting up an admin account
-- Run the SQL script located: `src/main/resources/sql-scripts/start-up.sql`
+- At startup, hibernate will automatically generate the MySQL schema and the application is configured to automatically run the script located at: `src/main/resources/data.sql`
 - This will setup an admin account which can now be used to interact with the application.
 
 ### Registering a new user.
@@ -34,7 +34,7 @@
 - This endpoint shall register this email if and only if it isn't already registered and respond with a token.
 
 ### Login process
-- Firstly, we login with the account we set up using the `start-up.sql` script and use the admin privelages to populate our database with store items which users could add to their wishlist.
+- Firstly, we login with the account we set up using the `data.sql` script and use the admin privelages to populate our database with store items which users could add to their wishlist.
   - **POST** http://localhost:8080/api/customers/authenticate expects a json as follows:
 ```json
         {
@@ -104,3 +104,4 @@
 #### Domain model
 - The following defines the relational database model. All the necessary persistent data is stored here with robust data integrity.
 ![domain-model-diagram](/images/domainmodel.png)
+
